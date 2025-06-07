@@ -1,5 +1,5 @@
-// export const BaseUrl = "http://localhost:4000/api";
-export const BaseUrl = "https://3c84-103-226-202-200.ngrok-free.app/api";
+export const BaseUrl = "http://localhost:4000/api";
+// export const BaseUrl = "https://3c84-103-226-202-200.ngrok-free.app/api";
 
 export interface loginProps {
   token: string;
@@ -61,4 +61,26 @@ export interface Cart {
   id: number;
   userId: number;
   items: CartItem[];
+}
+
+export interface OrderItem {
+  id: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  product: Product;
+  orderId: number;
+}
+
+export interface Order {
+  id: number;
+  userId: number;
+  address: string;
+  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled"; // Customize as per your logic
+  paymentStatus: "paid" | "unpaid" | "failed";
+  paymentId: string;
+  total: number;
+  createdAt: string; // ISO string
+  updatedAt: string;
+  items: OrderItem[];
 }

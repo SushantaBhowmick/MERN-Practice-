@@ -4,6 +4,6 @@ const { createCheckoutSession, webhookCall } = require('../controllers/paymentCo
 const router = express.Router();
 
 router.route('/create-checkout-session').post(isAuthenticated, createCheckoutSession)
-router.route('/webhook').post(webhookCall)
+router.route('/webhook').post(express.raw({ type: 'application/json' }),  webhookCall)
 
 module.exports = router;

@@ -24,10 +24,12 @@ export async function registerUser(name:string,email:string,password:string){
 
 export async function loadUser(){
     const token = localStorage.getItem("token");
-    const res = await axios.get(`${BaseUrl}/user/profile`,{
+   if(token){
+     const res = await axios.get(`${BaseUrl}/user/profile`,{
         headers:{Authorization: `Bearer ${token}`}
     });
     if(res){
         return res.data;
     }
+   }
 }

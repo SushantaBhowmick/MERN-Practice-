@@ -60,8 +60,8 @@ exports.webhookCall = async (req, res) => {
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
   } catch (error) {
-    console.error("❌ Webhook verification failed:", err.message);
-    return res.status(400).json({ Webhook_Error: err.message });
+    console.error("❌ Webhook verification failed:", error.message);
+    return res.status(400).json({ Webhook_Error: error.message });
   }
 
   if (event.type === "checkout.session.completed") {
@@ -92,6 +92,8 @@ exports.webhookCall = async (req, res) => {
       price: item.product.price,
     }));
 
+    const total = cart.items.reduce((sum,curr)=>sum+curr.product.price*curr.quantity,0)
+
     // create order
     await prisma.order.create({
       data: {
@@ -100,6 +102,7 @@ exports.webhookCall = async (req, res) => {
         status: "pending",
         paymentStatus: session.payment_status,
         paymentId: session.payment_intent,
+        total,
         items: {
           create: orderItemsData,
         },
@@ -109,7 +112,7 @@ exports.webhookCall = async (req, res) => {
     // clear the cart
     await prisma.cartItem.deleteMany({ where: { cartId: cart.id } });
 
-    console.log("✅ Order successfully created:", order.id);
+    console.log("✅ Order successfully created:");
     res.status(200).json({ received: true });
   }
 };

@@ -43,7 +43,25 @@ exports.createOrder = async (req, res) => {
 
      res.status(201).json({ success: true, message: "Order placed", order });
   } catch (error) {
-    console.error("Create Order Failed:", err.message);
+    console.error("Create Order Failed:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+exports.getUserOrders = async (req, res) => {
+  const { userId } = req.user;
+  try {
+   const orders = await prisma.order.findMany({
+    where:{userId},
+    include:{
+      items:{
+        include:{product:true}
+      }
+    }
+   })
+
+     res.status(201).json({ success: true, message: "Order placed", orders });
+  } catch (error) {
+    console.error("Create Order Failed:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

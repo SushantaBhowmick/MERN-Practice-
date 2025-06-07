@@ -20,6 +20,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import PaymentCancel from "./pages/payment/PaymentCancel";
 import PaymentSuccess from "./pages/payment/PaymentSuccess";
+import UserOrders from "./pages/UserOrder";
 function App() {
   // const username = "Sushanta"
   const { setUser } = useUser();
@@ -51,6 +52,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="cart" element={<Cart />} />
+              <Route path="orders" element={<UserOrders />} />
               <Route path="checkout" element={<Checkout />} />
               <Route path="cancel" element={<PaymentCancel />} />
               <Route path="success" element={<PaymentSuccess />} />

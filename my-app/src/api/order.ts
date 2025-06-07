@@ -1,11 +1,11 @@
 import axios from "axios";
 import { BaseUrl } from "../constant";
 
-export const removeCartItem = async (address: string) => {
+export const getUserOrders = async () => {
   const token = localStorage.getItem("token");
 
-  const res = await axios.post(
-    `${BaseUrl}/order/create`,{address},
+  const res = await axios.get(
+    `${BaseUrl}/order/user`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

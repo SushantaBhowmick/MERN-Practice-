@@ -6,7 +6,14 @@ const cors = require('cors')
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({ origin: '*', credentials: true }));
-app.use(express.json());
+app.use((req, res, next) => {
+    console.log("requrl",req.originalUrl)
+  if (req.originalUrl === "/api/payment/webhook") {
+    next(); // skip parsing body for webhook
+  } else {
+    express.json()(req, res, next);
+  }
+});
 app.use("/uploads",express.static("uploads"))
 
 
