@@ -1,5 +1,5 @@
-export const BaseUrl = "http://localhost:4000/api";
-// export const BaseUrl = "https://3c84-103-226-202-200.ngrok-free.app/api";
+// export const BaseUrl = "http://localhost:4000/api";
+export const BaseUrl = "https://3c84-103-226-202-200.ngrok-free.app/api";
 
 export interface loginProps {
   token: string;
