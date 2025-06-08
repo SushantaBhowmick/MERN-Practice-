@@ -65,10 +65,8 @@ exports.webhookCall = async (req, res) => {
   }
 
   if (event.type === "checkout.session.completed") {
-    console.log(event.data);
     const session = event.data.object;
     const metadata = session.metadata;
-    console.log("metadata", metadata);
 
     if (!metadata || !metadata.userId) {
       return res.status(400).json({ error: "Missing metadata for order." });

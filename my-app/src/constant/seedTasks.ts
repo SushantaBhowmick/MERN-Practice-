@@ -17,7 +17,7 @@ const createTask = async (index:number) => {
       task,
       {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTc0ODA4NjU3NSwiZXhwIjoxNzQ4MTI5Nzc1fQ.EOZ-pjUbymTYJcOnohcte-C3tnBg34M0tyVMaTVV_tA`,
+          Authorization: `Bearer example_token`,
         },
       }
     );
